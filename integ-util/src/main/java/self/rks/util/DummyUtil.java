@@ -7,7 +7,7 @@ public class DummyUtil {
      * @return a dummy value.
      */
     public static String getDummyName() {
-        return "DummyName";
+        return "DummyName-2";
     }
 
 }

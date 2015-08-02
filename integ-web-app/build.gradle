@@ -1,11 +1,53 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-cargo-plugin:2.1.1'
+    }
+}
+
 apply plugin: 'war'
+apply plugin: 'jetty'
+apply plugin: 'com.bmuschko.cargo'
+apply plugin: 'com.bmuschko.cargo-base'
 
 repositories {
     jcenter()
+}
+
+cargo {
+
+    containerId = 'wildfly8x'
+
+    remote {
+        hostname = 'localhost'
+        username = 'admin'
+        password = 'admin'
+    }
+
+    local {
+        jvmArgs = '-Xdebug -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n'
+        homeDir = file('C:\\User-Area\\PF\\ent\\servers\\wildfly-9.0.1.Final')
+    }
 }
 
 dependencies {
     compile project(':integ-util')
     compile 'org.apache.commons:commons-lang3:3.4'
     providedCompile 'javax:javaee-api:7.0'
+
+    def cargoVersion = '1.4.15'
+    cargo "org.codehaus.cargo:cargo-ant:${cargoVersion}"
+    cargo "org.codehaus.cargo:cargo-core-uberjar:${cargoVersion}"
+    cargo "org.codehaus.cargo:cargo-core-container-wildfly:${cargoVersion}"
+    cargo 'org.wildfly:wildfly-controller-client:8.2.0.Final'
+}
+
+task deployToLocalServer(
+        type: com.bmuschko.gradle.cargo.tasks.remote.CargoRedeployRemote,
+        dependsOn: ['war']) {
+
+    println('deployToLocalServer')
 }

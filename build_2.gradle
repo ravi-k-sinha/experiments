@@ -1,0 +1,10 @@
+String myWorkstation = 'ravi-pc'
+def String buildHostname
+def String buildUser
+task determineEnv << {
+    println("The name of myWorkstation' host is " + myWorkstation)
+    buildHostname = InetAddress.getLocalHost().getHostName().toLowerCase().trim()
+    println('The name of this build host is ' + buildHostname)
+    buildUser = System.getProperty("user.name").toLowerCase().trim()
+    println('The name of this build user is ' + buildUser)
+}

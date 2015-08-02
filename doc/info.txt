@@ -1,0 +1,4 @@
+Links
+
+- https://gesker.wordpress.com/2015/07/09/gradle-2-5-with-wildfly-9-0-0-final-and-intellij-14/
+- http://eugenedvorkin.com/integration-testing-with-gradle-selenium-and-spock-for-java-project-part-1/
