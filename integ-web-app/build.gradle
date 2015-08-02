@@ -5,6 +5,7 @@ repositories {
 }
 
 dependencies {
+    compile project(':integ-util')
     compile 'org.apache.commons:commons-lang3:3.4'
     providedCompile 'javax:javaee-api:7.0'
 }
