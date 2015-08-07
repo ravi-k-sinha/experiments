@@ -6,6 +6,7 @@
 
     <display-name>Web Application</display-name>
 
+    <!-- -->
     <servlet>
         <servlet-name>Resteasy-ex03</servlet-name>
         <servlet-class>
@@ -36,6 +37,23 @@
     <servlet-mapping>
         <servlet-name>Resteasy-ex04</servlet-name>
         <url-pattern>rapi/ex04_1/*</url-pattern>
+    </servlet-mapping>
+    <!-- -->
+
+    <servlet>
+        <servlet-name>Resteasy-ex14</servlet-name>
+        <servlet-class>
+            org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+        </servlet-class>
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>self.rks.com.restfully.shop.ex14_1.services.ShoppingApplication</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Resteasy-ex14</servlet-name>
+        <url-pattern>rapi/ex14_1/*</url-pattern>
     </servlet-mapping>
 
 </web-app>

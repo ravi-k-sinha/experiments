@@ -39,6 +39,9 @@ dependencies {
     providedCompile 'javax:javaee-api:7.0'
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile 'org.apache.httpcomponents:httpclient:4.5'
+    providedCompile 'org.jboss.resteasy:resteasy-jaxrs:3.0.9.Final'
+    providedCompile 'org.jboss.resteasy:resteasy-jaxb-provider:3.0.9.Final'
+    providedCompile 'org.jboss.resteasy:resteasy-client:3.0.9.Final'
 
     def cargoVersion = '1.4.15'
     cargo "org.codehaus.cargo:cargo-ant:${cargoVersion}"
@@ -57,3 +60,7 @@ task deployToLocalServer(
 task runMyTests(type: org.gradle.api.tasks.testing.Test, dependsOn: ['cleanTest', 'deployToLocalServer'])
 
 task repeatTests(type: org.gradle.api.tasks.testing.Test, dependsOn: ['cleanTest'])
+
+task runEjbIntegTests(type : org.gradle.api.tasks.testing.Test, dependsOn : ['cleanTest', 'deployToLocalServer']) {
+    include '**/ex14_1/**'
+}
