@@ -6,7 +6,7 @@
 
     <display-name>Web Application</display-name>
 
-    <!-- -->
+    <!--
     <servlet>
         <servlet-name>Resteasy-ex03</servlet-name>
         <servlet-class>
@@ -38,8 +38,9 @@
         <servlet-name>Resteasy-ex04</servlet-name>
         <url-pattern>rapi/ex04_1/*</url-pattern>
     </servlet-mapping>
-    <!-- -->
+    -->
 
+    <!--
     <servlet>
         <servlet-name>Resteasy-ex14</servlet-name>
         <servlet-class>
@@ -55,5 +56,6 @@
         <servlet-name>Resteasy-ex14</servlet-name>
         <url-pattern>rapi/ex14_1/*</url-pattern>
     </servlet-mapping>
+    -->
 
 </web-app>

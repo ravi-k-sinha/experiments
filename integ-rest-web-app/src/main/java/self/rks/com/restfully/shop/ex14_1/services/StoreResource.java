@@ -10,7 +10,7 @@ import javax.ws.rs.core.UriInfo;
  * @author <a href="mailto:bill@burkecentral.com">Bill Burke</a>
  * @version $Revision: 1 $
  */
-@Path("rapi/ex14_1/shop")
+@Path("/shop")
 public interface StoreResource
 {
    @HEAD
