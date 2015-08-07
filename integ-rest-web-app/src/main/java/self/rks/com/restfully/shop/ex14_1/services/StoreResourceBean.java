@@ -17,9 +17,9 @@ public class StoreResourceBean implements StoreResource
    public Response head(UriInfo uriInfo)
    {
       UriBuilder absolute = uriInfo.getBaseUriBuilder();
-      URI customerUrl = absolute.clone().path("customers").build();
-      URI orderUrl = absolute.clone().path("orders").build();
-      URI productUrl = absolute.clone().path("products").build();
+      URI customerUrl = absolute.clone().path("rapi/ex14_1/customers").build();
+      URI orderUrl = absolute.clone().path("/rapi/ex14_1/orders").build();
+      URI productUrl = absolute.clone().path("/rapi/ex14_1/products").build();
       Link customers = Link.fromUri(customerUrl).rel("customers").type("application/xml").build();
       Link orders = Link.fromUri(orderUrl).rel("orders").type("application/xml").build();
       Link products = Link.fromUri(productUrl).rel("products").type("application/xml").build();

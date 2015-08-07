@@ -20,7 +20,7 @@ import javax.ws.rs.core.UriInfo;
  * @author <a href="mailto:bill@burkecentral.com">Bill Burke</a>
  * @version $Revision: 1 $
  */
-@Path("/customers")
+@Path("/rapi/ex14_1/customers")
 public interface CustomerResource
 {
    @POST

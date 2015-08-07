@@ -6,17 +6,17 @@ import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 
-@ApplicationPath("/rapi/ex14_1")
+//@ApplicationPath("/rapi/ex14_1")
 public class ShoppingApplication extends Application
 {
     private Set<Object> singletons = new HashSet<>();
     private Set<Class<?>> classes = new HashSet<>();
 
     public ShoppingApplication() {
-        //classes.add(CustomerResourceBean.class);
-        //classes.add(OrderResourceBean.class);
-        //classes.add(ProductResourceBean.class);
-        //classes.add(StoreResourceBean.class);
+        classes.add(CustomerResourceBean.class);
+        classes.add(OrderResourceBean.class);
+        classes.add(ProductResourceBean.class);
+        classes.add(StoreResourceBean.class);
     }
 
     @Override
