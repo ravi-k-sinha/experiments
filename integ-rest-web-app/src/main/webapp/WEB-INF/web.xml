@@ -56,4 +56,20 @@
         <url-pattern>rapi/ex14_1/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>json-eg-1</servlet-name>
+        <servlet-class>
+            org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+        </servlet-class>
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>self.rks.example1.RESTEasyJSONApplication</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>json-eg-1</servlet-name>
+        <url-pattern>rapi/json-eg-1/*</url-pattern>
+    </servlet-mapping>
+
 </web-app>

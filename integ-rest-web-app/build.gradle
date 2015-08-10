@@ -42,6 +42,7 @@ dependencies {
     providedCompile 'org.jboss.resteasy:resteasy-jaxrs:3.0.9.Final'
     providedCompile 'org.jboss.resteasy:resteasy-jaxb-provider:3.0.9.Final'
     providedCompile 'org.jboss.resteasy:resteasy-client:3.0.9.Final'
+    providedCompile 'org.jboss.resteasy:resteasy-jackson-provider:3.0.9.Final'
 
     def cargoVersion = '1.4.15'
     cargo "org.codehaus.cargo:cargo-ant:${cargoVersion}"
