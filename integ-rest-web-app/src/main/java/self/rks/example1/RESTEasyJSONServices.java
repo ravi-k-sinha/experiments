@@ -15,9 +15,10 @@ public class RESTEasyJSONServices {
     }
 
     @POST
-    @Path("/send")
+    @Path("/send/{id}")
     @Consumes("application/json")
-    public Response consumeJSON(Student student) {
+    public Response consumeJSON(@PathParam("id") int id, Student student) {
+        System.out.println("The id consumed along with Jackson arg is " + id);
         String output = student.toString();
 
         return Response.status(200).entity(output).build();
