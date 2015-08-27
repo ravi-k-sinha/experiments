@@ -1,4 +1,4 @@
 rootProject.name = 'integ-app'
 
-include 'integ-util', 'integ-web-app', 'integ-rest-web-app'
+include 'integ-java-experiments', 'integ-util', 'integ-web-app', 'integ-rest-web-app'
 
