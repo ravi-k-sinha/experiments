@@ -23,7 +23,6 @@ public class ShoutServlet extends HttpServlet {
         final AsyncContext asyncContext = req.startAsync(req, resp);
         asyncContext.setTimeout(10 * 60 * 1000);
         contexts.add(asyncContext);
-
     }
 
     @Override
