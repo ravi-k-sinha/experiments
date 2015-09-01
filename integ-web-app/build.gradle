@@ -33,6 +33,11 @@ cargo {
     }
 }
 
+jettyRun  {
+    reload = "automatic"
+    scanIntervalSeconds = 5
+}
+
 dependencies {
     compile project(':integ-util')
     compile 'org.apache.commons:commons-lang3:3.4'
