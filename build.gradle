@@ -11,9 +11,26 @@ subprojects {
     version '0.1-SNAPSHOT'
 
     apply plugin: 'java'
+    apply plugin: 'pmd'
+    apply plugin: 'findbugs'
+    
+    pmd {
+        ruleSets = [
+                "java-basic",
+                "java-naming"
+                ]
+    }
+    
+    tasks.withType(FindBugs) {
+        reports {
+            html.enabled = true
+            xml.enabled = false
+        }
+    }
 
     repositories {
         jcenter()
+        mavenCentral()
     }
 
     dependencies {
