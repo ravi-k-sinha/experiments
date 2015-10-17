@@ -1,0 +1,14 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+
+mainClassName = 'jmodern.Main'
+
+dependencies {
+    compile 'com.google.guava:guava:18.0'
+}
+
+run {
+    systemProperty 'jmodern.name', 'Jack'
+}
