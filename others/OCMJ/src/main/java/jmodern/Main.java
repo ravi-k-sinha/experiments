@@ -7,6 +7,12 @@ public class Main {
     public static void main(String[] args) {
         System.out.println(triple("Hello World!"));
         System.out.println("My name is " + System.getProperty("jmodern.name"));
+        
+        System.out.println(useFooBar(3, 4, (x, y) -> x * y));
+    }
+    
+    static int useFooBar(int x, int y, FooBar fb) {
+        return fb.bar(x) ? fb.foo(x, y) : -1;
     }
     
     static String triple(String str) {

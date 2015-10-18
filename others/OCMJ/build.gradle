@@ -3,7 +3,7 @@ apply plugin: 'application'
 
 sourceCompatibility = 1.8
 
-mainClassName = 'jmodern.Main2'
+mainClassName = 'jmodern.Main'
 
 configurations {
     markdownDoclet
