@@ -1,0 +1,34 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+
+mainClassName = 'jmodern.Main6'
+
+configurations {
+    System.out.println "SOMETHING:" + "${rootProject.projectDir}"
+    markdownDoclet    
+    quasar
+}
+
+dependencies {
+    compile 'com.google.guava:guava:18.0'
+    
+    markdownDoclet 'ch.raffael.pegdown-doclet:pegdown-doclet:1.1.1'
+    
+    compile "co.paralleluniverse:quasar-core:0.7.3:jdk8"
+    compile "co.paralleluniverse:quasar-actors:0.7.3"
+    quasar "co.paralleluniverse:quasar-core:0.7.3:jdk8"
+}
+
+run {    
+    systemProperty 'jmodern.name', 'Jack'
+    systemProperty "co.paralleluniverse.actors.moduleDir", "${rootProject.projectDir}/others/OCMJ/modules"
+    jvmArgs "-javaagent:${configurations.quasar.iterator().next()}"
+}
+
+javadoc.options {
+    docletpath = configurations.markdownDoclet.files.asType(List)
+    doclet = "ch.raffael.doclets.pegdown.PegdownDoclet"
+    addStringOption("parse-timeout", "10")
+}

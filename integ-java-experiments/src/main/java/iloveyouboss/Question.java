@@ -8,7 +8,8 @@ public abstract class Question {
    public Question(int id, String text, String[] answerChoices) {
       this.id = id;
       this.text = text;
-      this.answerChoices = answerChoices;
+      this.answerChoices = new String[answerChoices.length];
+      System.arraycopy(answerChoices, 0, this.answerChoices, 0, answerChoices.length);
    }
    
    public int getId() {

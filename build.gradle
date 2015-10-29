@@ -19,6 +19,8 @@ subprojects {
                 "java-basic",
                 "java-naming"
                 ]
+                
+        ignoreFailures = true
     }
     
     tasks.withType(FindBugs) {
@@ -26,6 +28,8 @@ subprojects {
             html.enabled = true
             xml.enabled = false
         }
+        
+        ignoreFailures = true
     }
 
     repositories {
