@@ -1,0 +1,27 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'bookex.bggng.jee7.ch02.Main'
+
+// Required to run the program as by default, the files do not come together and WELD is not able to find the classes
+// http://stackoverflow.com/questions/30255760/bean-discovery-problems-when-using-weld-se-with-gradle-application-plugin
+// http://stackoverflow.com/questions/21358466/gradle-to-execute-java-class-without-modifying-build-gradle
+sourceSets {
+    main {
+        output.resourcesDir = 'build/classes/main'
+        output.classesDir   = 'build/classes/main'
+    }
+    test {
+        output.resourcesDir = 'build/classes/test'
+        output.classesDir   = 'build/classes/test'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jboss.weld.se:weld-se:2.0+"
+}
+
