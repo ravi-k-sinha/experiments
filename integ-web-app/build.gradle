@@ -62,6 +62,14 @@ dependencies {
     mysqldriver 'mysql:mysql-connector-java:5.1.38'
 }
 
+def mysqlDb = [
+        classpath: configurations.mysqldriver.asPath,
+        driver: 'com.mysql.jdbc.Driver',
+        url: 'jdbc:mysql://localhost:3306/expdb',
+        user: 'root',
+        password: 'admin'
+]
+
 task deployToLocalServer(
         type: CargoRedeployRemote,
         dependsOn: ['war']) {
@@ -70,13 +78,19 @@ task deployToLocalServer(
 }
 
 task loadDriver() {
-    URLClassLoader loader = GroovyObject.class.classLoader
-    configurations.mysqldriver.each {File file ->
-        loader.addURL(file.toURI().toURL())
+
+    doLast {
+        URLClassLoader loader = GroovyObject.class.classLoader
+        configurations.mysqldriver.each { File file ->
+            loader.addURL(file.toURI().toURL())
+        }
+        println 'MySQL Driver Loaded...'
     }
-    println 'MySQL Driver Loaded...'
 }
 
+/**
+ * A sample task to connect database using Groovy SQl library
+ */
 task callDatabase(dependsOn: loadDriver) {
 
     doLast {
@@ -90,5 +104,23 @@ task callDatabase(dependsOn: loadDriver) {
         sql.close()
         println '... ready'
     }
+}
 
+task renewDatabase {
+    doLast {
+        ant.echo 'Starting database renewal ...'
+        ant.sql(
+                classpath: mysqlDb.classpath,
+                driver: mysqlDb.driver,
+                url: mysqlDb.url,
+                userid: mysqlDb.user,
+                password: mysqlDb.password,
+                onerror: 'continue',
+                print: true
+        ) {
+            transaction(src: 'src/scripts/db/emptyDb.sql')
+            transaction(src: 'src/scripts/db/populateDb.sql')
+        }
+        ant.echo 'Database renewal completed ...'
+    }
 }
