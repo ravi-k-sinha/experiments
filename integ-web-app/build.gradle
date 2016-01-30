@@ -1,3 +1,13 @@
+import com.bmuschko.gradle.cargo.tasks.remote.CargoRedeployRemote
+import groovy.sql.Sql
+
+def cargoVersion = '1.4.18'
+
+apply plugin: 'war'
+apply plugin: 'jetty'
+apply plugin: 'com.bmuschko.cargo'
+apply plugin: 'com.bmuschko.cargo-base'
+
 buildscript {
     repositories {
         jcenter()
@@ -5,21 +15,21 @@ buildscript {
 
     dependencies {
         classpath 'com.bmuschko:gradle-cargo-plugin:2.1.1'
+        classpath 'mysql:mysql-connector-java:5.1.38'
     }
 }
-
-apply plugin: 'war'
-apply plugin: 'jetty'
-apply plugin: 'com.bmuschko.cargo'
-apply plugin: 'com.bmuschko.cargo-base'
 
 repositories {
     jcenter()
 }
 
+configurations {
+    mysqldriver
+}
+
 cargo {
 
-    containerId = 'wildfly8x'
+    containerId = 'wildfly9x'
 
     remote {
         hostname = 'localhost'
@@ -40,19 +50,45 @@ jettyRun  {
 
 dependencies {
     compile project(':integ-util')
+    compile project(':integ-domain-1')
     compile 'org.apache.commons:commons-lang3:3.4'
     providedCompile 'javax:javaee-api:7.0'
 
-    def cargoVersion = '1.4.15'
     cargo "org.codehaus.cargo:cargo-ant:${cargoVersion}"
     cargo "org.codehaus.cargo:cargo-core-uberjar:${cargoVersion}"
     cargo "org.codehaus.cargo:cargo-core-container-wildfly:${cargoVersion}"
     cargo 'org.wildfly:wildfly-controller-client:8.2.0.Final'
+
+    mysqldriver 'mysql:mysql-connector-java:5.1.38'
 }
 
 task deployToLocalServer(
-        type: com.bmuschko.gradle.cargo.tasks.remote.CargoRedeployRemote,
+        type: CargoRedeployRemote,
         dependsOn: ['war']) {
 
-    println('deployToLocalServer')
+    //println('deployToLocalServer')
+}
+
+task loadDriver() {
+    URLClassLoader loader = GroovyObject.class.classLoader
+    configurations.mysqldriver.each {File file ->
+        loader.addURL(file.toURI().toURL())
+    }
+    println 'MySQL Driver Loaded...'
+}
+
+task callDatabase(dependsOn: loadDriver) {
+
+    doLast {
+        println 'Connecting to database ...'
+        def sql = Sql.newInstance('jdbc:mysql://localhost:3306/expdb', 'root', 'admin', 'com.mysql.jdbc.Driver')
+        println '... connected'
+        println 'Querying database tables ...'
+        sql.eachRow('show tables') { row ->
+            println row
+        }
+        sql.close()
+        println '... ready'
+    }
+
 }
