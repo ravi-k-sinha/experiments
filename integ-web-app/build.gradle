@@ -8,6 +8,22 @@ apply plugin: 'jetty'
 apply plugin: 'com.bmuschko.cargo'
 apply plugin: 'com.bmuschko.cargo-base'
 
+if (!project.hasProperty('environment')) {
+    ant.echo "Using 'dev' as no environment specified. A specific environment can be specified s -Penvironment=dev/qa/prod/local"
+    ant.echo "Among all local-env.gradle should be ignored in source control system."
+    ext.environment = 'dev'
+
+    println project(':integ-util').file('integ-util.iml')
+}
+
+def envScript = file("$environment-env.gradle")
+
+if (!envScript.exists()) {
+    throw new GradleException("Unknown Environment: $environment");
+}
+
+apply from: envScript
+
 buildscript {
     repositories {
         jcenter()
@@ -106,9 +122,9 @@ task callDatabase(dependsOn: loadDriver) {
     }
 }
 
-task renewDatabase {
+task emptyDatabase {
     doLast {
-        ant.echo 'Starting database renewal ...'
+        ant.echo 'Starting to empty database ...'
         ant.sql(
                 classpath: mysqlDb.classpath,
                 driver: mysqlDb.driver,
@@ -119,8 +135,30 @@ task renewDatabase {
                 print: true
         ) {
             transaction(src: 'src/scripts/db/emptyDb.sql')
-            transaction(src: 'src/scripts/db/populateDb.sql')
         }
-        ant.echo 'Database renewal completed ...'
+        ant.echo 'Database emptying completed ...'
     }
 }
+
+task populateDatabase {
+    doLast {
+        ant.echo 'Starting database population ...'
+        ant.sql(
+                classpath: mysqlDb.classpath,
+                driver: mysqlDb.driver,
+                url: mysqlDb.url,
+                userid: mysqlDb.user,
+                password: mysqlDb.password,
+                onerror: 'continue',
+                print: true
+        ) {
+            transaction(src: 'src/scripts/db/populateDb.sql')
+        }
+        ant.echo 'Database population completed ...'
+    }
+}
+
+task renewDatabase(dependsOn: [emptyDatabase, populateDatabase]) {
+}
+
+populateDatabase.shouldRunAfter(emptyDatabase)
