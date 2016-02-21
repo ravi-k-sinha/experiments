@@ -66,6 +66,10 @@ public class CitationHistogramJob extends Configured implements Tool {
         return 0;
     }
 
+    /**
+     * Input to this program is output from CitationCounterJob
+     * hadoop jar build/libs/<jar-name> self.rks.hadoop.hia.CitationHistogramJob output/part-00000 output2/
+     */
     public static void main(String[] args) throws Exception {
         int res = ToolRunner.run(new Configuration(), new CitationHistogramJob(), args);
 
