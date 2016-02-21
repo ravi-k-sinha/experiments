@@ -1,0 +1,7 @@
+apply plugin: 'java'
+
+ext.hadoopVersion = '2.7.2'
+
+dependencies {
+    compile "org.apache.hadoop:hadoop-client:${hadoopVersion}"
+}

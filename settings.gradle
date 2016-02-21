@@ -2,5 +2,6 @@ rootProject.name = 'integ-app'
 
 include 'integ-groovy-experiments', 'integ-java-experiments', 'integ-util',
         'integ-domain-cmn', 'integ-domain-1',
-        'integ-web-app', 'integ-rest-web-app', 'others/OCMJ', 'bookex/bgnng-jee7'
+        'integ-web-app', 'integ-rest-web-app', 'others/OCMJ', 'bookex/bgnng-jee7',
+        'integ-hadoop-experiments'
 
