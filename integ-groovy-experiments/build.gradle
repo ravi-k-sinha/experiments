@@ -6,5 +6,8 @@ repositories {
 
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.4.4'
+    compile 'org.eclipse.jetty:jetty-server:9.3.8.v20160314'
+    compile 'org.eclipse.jetty:jetty-servlet:9.3.8.v20160314'
+    compile 'org.apache.ivy:ivy:2.4.0'
     testCompile 'junit:junit:4.12'
 }
