@@ -9,8 +9,8 @@ apply plugin: 'com.bmuschko.cargo'
 apply plugin: 'com.bmuschko.cargo-base'
 
 if (!project.hasProperty('environment')) {
-    ant.echo "Using 'dev' as no environment specified. A specific environment can be specified s -Penvironment=dev/qa/prod/local"
-    ant.echo "Among all local-env.gradle should be ignored in source control system."
+    ant.echo "Using 'dev' as no environment specified. A specific environment can be specified as -Penvironment=dev/qa/prod/local"
+    ant.echo "Among all members, local-env.gradle should be ignored in source control system."
     ext.environment = 'dev'
 
     println project(':integ-util').file('integ-util.iml')
