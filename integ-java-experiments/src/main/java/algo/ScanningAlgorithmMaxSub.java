@@ -1,4 +1,4 @@
-package ds;
+package algo;
 
 public class ScanningAlgorithmMaxSub {
 

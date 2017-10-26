@@ -1,4 +1,4 @@
-package ds;
+package algo;
 
 /**
  * Implements the classic insertion sort routine

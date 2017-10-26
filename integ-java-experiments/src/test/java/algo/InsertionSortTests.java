@@ -1,4 +1,4 @@
-package ds;
+package algo;
 
 import org.junit.Assert;
 import org.junit.Before;
