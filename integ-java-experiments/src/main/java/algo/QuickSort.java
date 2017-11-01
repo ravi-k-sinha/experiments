@@ -1,8 +1,8 @@
 package algo;
 
-public class QuickSort {
+class QuickSort {
 
-    public int[] sortInts(int[] input) {
+    int[] sortInts(int[] input) {
         sort(input, 0, input.length - 1);
         return input;
     }
@@ -22,8 +22,6 @@ public class QuickSort {
 
     // returns the pivot index after partition
     private int partition(int[] array, int left, int right) {
-
-        System.out.printf("left=%d, right=%d\n", left, right);
 
         int pivotIndex = right;
         int pivot = array[pivotIndex];
